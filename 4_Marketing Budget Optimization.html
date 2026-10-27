@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIKE AI Marketing Budget Optimizer — Executive Suite</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* Robust fallback CSS ensuring 100% functionality even without external styles */
+    :root {
+      --bg-main: #0b0f17;
+      --bg-card: #111827;
+      --bg-card-sub: #1a2234;
+      --bg-card-alt: #1f293d;
+      --border-col: #2e384d;
+      --text-main: #f9fafb;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent-orange: #ea580c;
+      --accent-emerald: #10b981;
+      --accent-blue: #3b82f6;
+      --accent-purple: #a855f7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 12px;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #111827; }
+    ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+    .tab-btn {
+      background-color: #1e293b;
+      color: #94a3b8;
+      border: 1px solid #334155;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      color: #ffffff;
+      background-color: #334155;
+    }
+    .tab-btn.active {
+      background-color: #ea580c !important;
+      color: #ffffff !important;
+      border-color: #f97316 !important;
+      font-weight: 700;
+    }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+    .slider-range {
+      width: 100%;
+      height: 6px;
+      background: #334155;
+      border-radius: 4px;
+      outline: none;
+      cursor: pointer;
+      accent-color: #ea580c;
+    }
+  </style>
+</head>
+<body class="bg-[#0b0f17] text-gray-100 antialiased p-3 sm:p-4 font-sans text-xs min-h-screen">
+
+  <!-- Top Disclaimer & Header -->
+  <header class="border-b border-gray-800 pb-3 mb-3">
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 bg-orange-600 rounded-lg flex items-center justify-center font-black text-white text-base shadow-md">
+          NIKE
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-2">
+            AI-Driven Marketing Budget Optimizer
+            <span class="px-2 py-0.5 text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 rounded-full border border-emerald-500/30 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> SLSQP Solver Active
+            </span>
+          </h1>
+          <p class="text-[11px] text-gray-400">Non-Linear Diminishing Returns Optimization & Causal Incrementality Engine</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" onclick="exportCSV()" class="px-3 py-1.5 bg-gray-800 hover:bg-orange-600 hover:text-white text-xs font-semibold text-gray-200 rounded-lg border border-gray-700 transition flex items-center gap-1.5 shadow-sm">
+          <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          Export Allocation (.CSV)
+        </button>
+      </div>
+    </div>
+
+    <!-- Mandatory Synthetic Data Disclaimer -->
+    <div class="bg-amber-950/40 border border-amber-600/40 px-3 py-1.5 rounded-lg text-[11px] text-amber-200 flex items-center justify-between">
+      <span>⚠️ <b>Case Study Notice:</b> This application uses synthetic data for demonstration and modeling purposes. The figures shown are not actual NIKE campaign or financial data.</span>
+      <span class="font-mono text-[10px] bg-amber-500/20 px-2 py-0.5 rounded text-amber-300">PORTFOLIO DEMO</span>
+    </div>
+  </header>
+
+  <!-- 10 Navigation Tabs -->
+  <nav class="overflow-x-auto flex space-x-1.5 border-b border-gray-800 pb-2.5 mb-3 text-xs" aria-label="Navigation Tabs">
+    <button type="button" onclick="switchTab('tab-exec')" id="btn-tab-exec" class="tab-btn active">1. Executive Overview</button>
+    <button type="button" onclick="switchTab('tab-camp')" id="btn-tab-camp" class="tab-btn">2. Campaign Funnel</button>
+    <button type="button" onclick="switchTab('tab-cust')" id="btn-tab-cust" class="tab-btn">3. Customer LTV & RFM</button>
+    <button type="button" onclick="switchTab('tab-attr')" id="btn-tab-attr" class="tab-btn">4. Attribution & Incrementality</button>
+    <button type="button" onclick="switchTab('tab-opt')" id="btn-tab-opt" class="tab-btn">5. Budget Optimizer ★</button>
+    <button type="button" onclick="switchTab('tab-scen')" id="btn-tab-scen" class="tab-btn">6. Scenario Simulator</button>
+    <button type="button" onclick="switchTab('tab-mon')" id="btn-tab-mon" class="tab-btn">7. Real-Time Monitor</button>
+    <button type="button" onclick="switchTab('tab-recs')" id="btn-tab-recs" class="tab-btn">8. AI Action Matrix</button>
+    <button type="button" onclick="switchTab('tab-qual')" id="btn-tab-qual" class="tab-btn">9. Data Quality Audit</button>
+    <button type="button" onclick="switchTab('tab-diag')" id="btn-tab-diag" class="tab-btn">10. Model Diagnostics</button>
+  </nav>
+
+  <!-- TAB PANES CONTAINER -->
+  <main class="space-y-4">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: EXECUTIVE DASHBOARD -->
+    <!-- ========================================== -->
+    <div id="tab-exec" class="tab-pane active space-y-4">
+      <!-- 8 Primary KPIs -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800 shadow-sm">
+          <div class="text-[10px] text-gray-400 font-medium">Total Marketing Spend</div>
+          <div class="text-lg sm:text-xl font-bold text-white font-mono mt-0.5">₹11.02 Cr</div>
+          <div class="text-[10px] text-gray-500">1,200 Campaigns</div>
+        </div>
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800 shadow-sm">
+          <div class="text-[10px] text-gray-400 font-medium">Attributed Revenue</div>
+          <div class="text-lg sm:text-xl font-bold text-emerald-400 font-mono mt-0.5">₹646.21 Cr</div>
+          <div class="text-[10px] text-emerald-500 font-medium">Gross Margin: 49.6%</div>
+        </div>
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800 shadow-sm">
+          <div class="text-[10px] text-gray-400 font-medium">Incremental Profit</div>
+          <div class="text-lg sm:text-xl font-bold text-orange-400 font-mono mt-0.5">₹320.29 Cr</div>
+          <div class="text-[10px] text-orange-400 font-medium">Causal Lift Adjusted</div>
+        </div>
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800 shadow-sm">
+          <div class="text-[10px] text-gray-400 font-medium">Blended ROAS</div>
+          <div class="text-lg sm:text-xl font-bold text-blue-400 font-mono mt-0.5">58.63x</div>
+          <div class="text-[10px] text-blue-400">Inc. ROAS: 48.91x</div>
+        </div>
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800 shadow-sm">
+          <div class="text-[10px] text-gray-400 font-medium">Blended CAC</div>
+          <div class="text-lg sm:text-xl font-bold text-purple-400 font-mono mt-0.5">₹3.38</div>
+          <div class="text-[10px] text-purple-400">32.61M Conversions</div>
+        </div>
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800 shadow-sm">
+          <div class="text-[10px] text-gray-400 font-medium">Marketing ROI</div>
+          <div class="text-lg sm:text-xl font-bold text-white font-mono mt-0.5">28.06x</div>
+          <div class="text-[10px] text-emerald-400 font-medium">Profit / Spend Multiple</div>
+        </div>
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800 shadow-sm">
+          <div class="text-[10px] text-gray-400 font-medium">Efficiency Index</div>
+          <div class="text-lg sm:text-xl font-bold text-yellow-400 font-mono mt-0.5">73.6 / 100</div>
+          <div class="text-[10px] text-yellow-500">Composite Score</div>
+        </div>
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800 shadow-sm">
+          <div class="text-[10px] text-gray-400 font-medium">Capital Conservation</div>
+          <div class="text-lg sm:text-xl font-bold text-emerald-400 font-mono mt-0.5">100.0%</div>
+          <div class="text-[10px] text-emerald-400 font-medium">Zero Budget Leakage</div>
+        </div>
+      </div>
+
+      <!-- Channel Breakdown Table -->
+      <div class="bg-gray-900/90 border border-gray-800 rounded-xl overflow-hidden shadow-sm">
+        <div class="px-3.5 py-2 border-b border-gray-800 flex justify-between items-center text-xs font-semibold">
+          <span class="text-white">Channel Efficiency & Reallocation Directives</span>
+          <span class="text-gray-400 text-[11px]">8 Marketing Channels (SLSQP Bounds Constrained)</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="bg-gray-950/80 text-gray-400 uppercase text-[10px] border-b border-gray-800">
+              <tr>
+                <th class="p-2 font-sans">Channel</th>
+                <th class="p-2">Spend (₹ Cr)</th>
+                <th class="p-2">Revenue (₹ Cr)</th>
+                <th class="p-2">ROAS</th>
+                <th class="p-2">CAC (₹)</th>
+                <th class="p-2">Inc. Lift</th>
+                <th class="p-2">Score</th>
+                <th class="p-2 font-sans">AI Action</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-800 text-gray-200">
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2 font-sans font-bold text-white flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-500"></span>Google Search</td>
+                <td class="p-2">₹2.41</td>
+                <td class="p-2 text-emerald-400 font-bold">₹152.88</td>
+                <td class="p-2">63.4x</td>
+                <td class="p-2">₹3.12</td>
+                <td class="p-2 text-emerald-400 font-bold">0.82</td>
+                <td class="p-2 text-emerald-400 font-bold">86.2</td>
+                <td class="p-2 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">INCREASE (+25%)</span></td>
+              </tr>
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2 font-sans font-bold text-white flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>Email/CRM</td>
+                <td class="p-2">₹0.98</td>
+                <td class="p-2 text-emerald-400 font-bold">₹74.12</td>
+                <td class="p-2">75.6x</td>
+                <td class="p-2">₹1.84</td>
+                <td class="p-2 text-emerald-400 font-bold">0.85</td>
+                <td class="p-2 text-emerald-400 font-bold">88.5</td>
+                <td class="p-2 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">INCREASE (+35%)</span></td>
+              </tr>
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2 font-sans font-bold text-white flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span>Display Retargeting</td>
+                <td class="p-2">₹1.26</td>
+                <td class="p-2 text-emerald-400 font-bold">₹78.89</td>
+                <td class="p-2">62.7x</td>
+                <td class="p-2">₹3.04</td>
+                <td class="p-2 text-emerald-400 font-bold">0.78</td>
+                <td class="p-2 text-emerald-400 font-bold">84.4</td>
+                <td class="p-2 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">INCREASE (+15%)</span></td>
+              </tr>
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2 font-sans font-bold text-white flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-purple-500"></span>Influencer</td>
+                <td class="p-2">₹1.54</td>
+                <td class="p-2">₹81.20</td>
+                <td class="p-2">52.7x</td>
+                <td class="p-2">₹3.62</td>
+                <td class="p-2">0.65</td>
+                <td class="p-2 text-yellow-400 font-bold">71.8</td>
+                <td class="p-2 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">HOLD</span></td>
+              </tr>
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2 font-sans font-bold text-white flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-500"></span>YouTube</td>
+                <td class="p-2">₹1.48</td>
+                <td class="p-2">₹76.45</td>
+                <td class="p-2">51.6x</td>
+                <td class="p-2">₹3.88</td>
+                <td class="p-2">0.60</td>
+                <td class="p-2 text-yellow-400 font-bold">69.4</td>
+                <td class="p-2 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">HOLD</span></td>
+              </tr>
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2 font-sans font-bold text-white flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-pink-500"></span>TikTok</td>
+                <td class="p-2">₹1.15</td>
+                <td class="p-2">₹54.20</td>
+                <td class="p-2">47.1x</td>
+                <td class="p-2">₹4.12</td>
+                <td class="p-2 text-red-400">0.52</td>
+                <td class="p-2 text-red-400 font-bold">62.1</td>
+                <td class="p-2 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400 border border-red-500/30">REDUCE (-18%)</span></td>
+              </tr>
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2 font-sans font-bold text-white flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-500"></span>Meta (FB/IG)</td>
+                <td class="p-2">₹1.32</td>
+                <td class="p-2">₹61.30</td>
+                <td class="p-2">46.4x</td>
+                <td class="p-2">₹4.35</td>
+                <td class="p-2 text-red-400">0.48</td>
+                <td class="p-2 text-red-400 font-bold">59.8</td>
+                <td class="p-2 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400 border border-red-500/30">REDUCE (-25%)</span></td>
+              </tr>
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2 font-sans font-bold text-white flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-gray-500"></span>Sponsorship</td>
+                <td class="p-2">₹0.88</td>
+                <td class="p-2">₹37.17</td>
+                <td class="p-2">42.2x</td>
+                <td class="p-2">₹4.90</td>
+                <td class="p-2 text-red-400">0.42</td>
+                <td class="p-2 text-red-400 font-bold">54.3</td>
+                <td class="p-2 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400 border border-red-500/30">REDUCE (-30%)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: CAMPAIGN FUNNEL -->
+    <!-- ========================================== -->
+    <div id="tab-camp" class="tab-pane space-y-4">
+      <!-- 7-Stage Funnel -->
+      <div class="bg-gray-900/90 p-4 rounded-xl border border-gray-800 shadow-sm">
+        <h3 class="text-sm font-bold text-white mb-2">7-Stage Customer Acquisition Funnel</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2 text-center font-mono text-xs">
+          <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800">
+            <div class="text-[10px] text-gray-400">1. Impressions</div>
+            <div class="text-sm font-bold text-white mt-1">16.08B</div>
+            <div class="text-[9px] text-gray-500 mt-0.5">CTR: 3.4%</div>
+          </div>
+          <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800">
+            <div class="text-[10px] text-gray-400">2. Clicks</div>
+            <div class="text-sm font-bold text-blue-400 mt-1">547M</div>
+            <div class="text-[9px] text-blue-400 mt-0.5">Lead Rate: 20%</div>
+          </div>
+          <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800">
+            <div class="text-[10px] text-gray-400">3. Leads</div>
+            <div class="text-sm font-bold text-purple-400 mt-1">109M</div>
+            <div class="text-[9px] text-purple-400 mt-0.5">CVR: 29.8%</div>
+          </div>
+          <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800">
+            <div class="text-[10px] text-gray-400">4. Conversions</div>
+            <div class="text-sm font-bold text-yellow-400 mt-1">32.6M</div>
+            <div class="text-[9px] text-yellow-500 mt-0.5">AOV: ₹198</div>
+          </div>
+          <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800">
+            <div class="text-[10px] text-gray-400">5. Customers</div>
+            <div class="text-sm font-bold text-orange-400 mt-1">10,000</div>
+            <div class="text-[9px] text-orange-500 mt-0.5">LTV: ₹10.8K</div>
+          </div>
+          <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800">
+            <div class="text-[10px] text-gray-400">6. Revenue</div>
+            <div class="text-sm font-bold text-emerald-400 mt-1">₹646 Cr</div>
+            <div class="text-[9px] text-emerald-500 mt-0.5">Margin: 49.6%</div>
+          </div>
+          <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800">
+            <div class="text-[10px] text-gray-400">7. Profit</div>
+            <div class="text-sm font-bold text-emerald-400 mt-1">₹320 Cr</div>
+            <div class="text-[9px] text-emerald-400 mt-0.5">ROI: 28.1x</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Campaign Filter Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-gray-900/90 p-3 rounded-xl border border-gray-800">
+        <div class="flex items-center gap-2 flex-1">
+          <input type="text" id="camp-search-input" oninput="filterCampTable()" placeholder="Search campaign name or objective..." class="bg-gray-950 border border-gray-700 rounded-lg px-3 py-1.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 w-full sm:w-64">
+          <select id="camp-filter-channel" onchange="filterCampTable()" class="bg-gray-950 border border-gray-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-orange-500">
+            <option value="ALL">All Channels (8)</option>
+            <option value="Google Search">Google Search</option>
+            <option value="Email/CRM">Email/CRM</option>
+            <option value="Display Retargeting">Display Retargeting</option>
+            <option value="Influencer">Influencer</option>
+            <option value="YouTube">YouTube</option>
+            <option value="TikTok">TikTok</option>
+            <option value="Meta">Meta</option>
+            <option value="Sponsorship">Sponsorship</option>
+          </select>
+        </div>
+        <span class="text-xs text-gray-400" id="camp-count-label">Showing 8 of 1,200 campaigns</span>
+      </div>
+
+      <!-- Campaign Explorer Table -->
+      <div class="bg-gray-900/90 border border-gray-800 rounded-xl overflow-hidden shadow-sm">
+        <div class="overflow-x-auto max-h-[320px]">
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="bg-gray-950 text-gray-400 uppercase text-[10px] border-b border-gray-800 sticky top-0">
+              <tr>
+                <th class="p-2.5 font-sans">Campaign</th>
+                <th class="p-2.5 font-sans">Channel</th>
+                <th class="p-2.5">Spend (₹)</th>
+                <th class="p-2.5">Revenue (₹)</th>
+                <th class="p-2.5">ROAS</th>
+                <th class="p-2.5">CAC (₹)</th>
+                <th class="p-2.5">Score</th>
+                <th class="p-2.5 font-sans">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-800 text-gray-200" id="camp-tbody">
+              <!-- Pre-rendered rows -->
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2.5 font-sans font-medium text-white">Air Max Pulse Launch</td>
+                <td class="p-2.5 font-sans text-gray-300">Google Search</td>
+                <td class="p-2.5">₹4,20,000</td>
+                <td class="p-2.5 text-emerald-400 font-bold">₹2,85,00,000</td>
+                <td class="p-2.5">67.8x</td>
+                <td class="p-2.5">₹2.85</td>
+                <td class="p-2.5 text-emerald-400 font-bold">89.2</td>
+                <td class="p-2.5 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Top Performer</span></td>
+              </tr>
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2.5 font-sans font-medium text-white">Member Days Exclusive</td>
+                <td class="p-2.5 font-sans text-gray-300">Email/CRM</td>
+                <td class="p-2.5">₹1,80,000</td>
+                <td class="p-2.5 text-emerald-400 font-bold">₹1,42,00,000</td>
+                <td class="p-2.5">78.9x</td>
+                <td class="p-2.5">₹1.62</td>
+                <td class="p-2.5 text-emerald-400 font-bold">91.4</td>
+                <td class="p-2.5 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Top Performer</span></td>
+              </tr>
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2.5 font-sans font-medium text-white">Running Pegasus Retarget</td>
+                <td class="p-2.5 font-sans text-gray-300">Display Retargeting</td>
+                <td class="p-2.5">₹3,10,000</td>
+                <td class="p-2.5 text-emerald-400 font-bold">₹1,98,00,000</td>
+                <td class="p-2.5">63.8x</td>
+                <td class="p-2.5">₹2.95</td>
+                <td class="p-2.5 text-emerald-400 font-bold">85.1</td>
+                <td class="p-2.5 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Healthy</span></td>
+              </tr>
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2.5 font-sans font-medium text-white">Marathon Athlete Series</td>
+                <td class="p-2.5 font-sans text-gray-300">Influencer</td>
+                <td class="p-2.5">₹4,50,000</td>
+                <td class="p-2.5">₹2,34,00,000</td>
+                <td class="p-2.5">52.0x</td>
+                <td class="p-2.5">₹3.70</td>
+                <td class="p-2.5 text-yellow-400 font-bold">72.4</td>
+                <td class="p-2.5 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">Normal</span></td>
+              </tr>
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2.5 font-sans font-medium text-white">Just Do It Anthem 2026</td>
+                <td class="p-2.5 font-sans text-gray-300">YouTube</td>
+                <td class="p-2.5">₹5,20,000</td>
+                <td class="p-2.5">₹2,65,00,000</td>
+                <td class="p-2.5">50.9x</td>
+                <td class="p-2.5">₹3.92</td>
+                <td class="p-2.5 text-yellow-400 font-bold">68.7</td>
+                <td class="p-2.5 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">Brand Lift</span></td>
+              </tr>
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2.5 font-sans font-medium text-white">Back to School Youth</td>
+                <td class="p-2.5 font-sans text-gray-300">TikTok</td>
+                <td class="p-2.5">₹3,80,000</td>
+                <td class="p-2.5">₹1,78,00,000</td>
+                <td class="p-2.5">46.8x</td>
+                <td class="p-2.5">₹4.15</td>
+                <td class="p-2.5 text-red-400 font-bold">61.2</td>
+                <td class="p-2.5 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400 border border-red-500/30">Underperforming</span></td>
+              </tr>
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2.5 font-sans font-medium text-white">Metcon Fitness Drop</td>
+                <td class="p-2.5 font-sans text-gray-300">Meta</td>
+                <td class="p-2.5">₹4,10,000</td>
+                <td class="p-2.5">₹1,89,00,000</td>
+                <td class="p-2.5">46.1x</td>
+                <td class="p-2.5">₹4.38</td>
+                <td class="p-2.5 text-red-400 font-bold">58.9</td>
+                <td class="p-2.5 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400 border border-red-500/30">Underperforming</span></td>
+              </tr>
+              <tr class="hover:bg-gray-800/40">
+                <td class="p-2.5 font-sans font-medium text-white">Premier League Partnership</td>
+                <td class="p-2.5 font-sans text-gray-300">Sponsorship</td>
+                <td class="p-2.5">₹2,90,000</td>
+                <td class="p-2.5">₹1,21,00,000</td>
+                <td class="p-2.5">41.7x</td>
+                <td class="p-2.5">₹4.95</td>
+                <td class="p-2.5 text-red-400 font-bold">53.8</td>
+                <td class="p-2.5 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400 border border-red-500/30">High Leakage</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: CUSTOMER RFM & LTV -->
+    <!-- ========================================== -->
+    <div id="tab-cust" class="tab-pane space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+        <div class="bg-gray-900/90 border border-emerald-500/40 p-3.5 rounded-xl shadow-sm">
+          <div class="flex justify-between items-center mb-1.5">
+            <span class="font-bold text-white text-sm">🏆 Champions</span>
+            <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded font-mono font-bold">1,820 Users</span>
+          </div>
+          <p class="text-xs text-gray-400 mb-2">Highest purchase frequency and monetary value. Strong brand advocates.</p>
+          <div class="text-xs space-y-1 font-mono text-gray-300">
+            <div class="flex justify-between"><span>Avg LTV:</span><b class="text-emerald-400">₹18,420</b></div>
+            <div class="flex justify-between"><span>Churn Risk:</span><b class="text-emerald-400">4.2%</b></div>
+            <div class="flex justify-between font-sans text-[11px] text-gray-400"><span>Action:</span><span class="text-white">VIP Early Access & Loyalty Drops</span></div>
+          </div>
+        </div>
+        <div class="bg-gray-900/90 border border-blue-500/40 p-3.5 rounded-xl shadow-sm">
+          <div class="flex justify-between items-center mb-1.5">
+            <span class="font-bold text-white text-sm">⭐ Loyal Customers</span>
+            <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded font-mono font-bold">2,410 Users</span>
+          </div>
+          <p class="text-xs text-gray-400 mb-2">Consistent repeat purchases across footwear and sportswear.</p>
+          <div class="text-xs space-y-1 font-mono text-gray-300">
+            <div class="flex justify-between"><span>Avg LTV:</span><b class="text-blue-400">₹12,150</b></div>
+            <div class="flex justify-between"><span>Churn Risk:</span><b class="text-blue-400">11.8%</b></div>
+            <div class="flex justify-between font-sans text-[11px] text-gray-400"><span>Action:</span><span class="text-white">Cross-sell premium apparel</span></div>
+          </div>
+        </div>
+        <div class="bg-gray-900/90 border border-yellow-500/40 p-3.5 rounded-xl shadow-sm">
+          <div class="flex justify-between items-center mb-1.5">
+            <span class="font-bold text-white text-sm">🌱 Potential Loyalists</span>
+            <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded font-mono font-bold">2,150 Users</span>
+          </div>
+          <p class="text-xs text-gray-400 mb-2">Recent first and second-time buyers with above-average basket sizes.</p>
+          <div class="text-xs space-y-1 font-mono text-gray-300">
+            <div class="flex justify-between"><span>Avg LTV:</span><b class="text-yellow-400">₹7,890</b></div>
+            <div class="flex justify-between"><span>Churn Risk:</span><b class="text-yellow-400">22.4%</b></div>
+            <div class="flex justify-between font-sans text-[11px] text-gray-400"><span>Action:</span><span class="text-white">Member onboarding rewards</span></div>
+          </div>
+        </div>
+        <div class="bg-gray-900/90 border border-orange-500/40 p-3.5 rounded-xl shadow-sm">
+          <div class="flex justify-between items-center mb-1.5">
+            <span class="font-bold text-white text-sm">⚠️ At Risk</span>
+            <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded font-mono font-bold">1,620 Users</span>
+          </div>
+          <p class="text-xs text-gray-400 mb-2">Past high spenders who have not ordered in over 90 days.</p>
+          <div class="text-xs space-y-1 font-mono text-gray-300">
+            <div class="flex justify-between"><span>Avg LTV:</span><b class="text-orange-400">₹9,430</b></div>
+            <div class="flex justify-between"><span>Churn Risk:</span><b class="text-orange-400">58.7%</b></div>
+            <div class="flex justify-between font-sans text-[11px] text-gray-400"><span>Action:</span><span class="text-white">Personalized win-back voucher</span></div>
+          </div>
+        </div>
+        <div class="bg-gray-900/90 border border-purple-500/40 p-3.5 rounded-xl shadow-sm">
+          <div class="flex justify-between items-center mb-1.5">
+            <span class="font-bold text-white text-sm">💤 Hibernating</span>
+            <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded font-mono font-bold">1,240 Users</span>
+          </div>
+          <p class="text-xs text-gray-400 mb-2">Low frequency, low engagement, last purchase over 150 days ago.</p>
+          <div class="text-xs space-y-1 font-mono text-gray-300">
+            <div class="flex justify-between"><span>Avg LTV:</span><b class="text-purple-400">₹3,210</b></div>
+            <div class="flex justify-between"><span>Churn Risk:</span><b class="text-purple-400">76.3%</b></div>
+            <div class="flex justify-between font-sans text-[11px] text-gray-400"><span>Action:</span><span class="text-white">Low-cost seasonal email trigger</span></div>
+          </div>
+        </div>
+        <div class="bg-gray-900/90 border border-red-500/40 p-3.5 rounded-xl shadow-sm">
+          <div class="flex justify-between items-center mb-1.5">
+            <span class="font-bold text-white text-sm">⛔ Lost Customers</span>
+            <span class="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded font-mono font-bold">760 Users</span>
+          </div>
+          <p class="text-xs text-gray-400 mb-2">Inactive over 270 days. Unresponsive to previous campaigns.</p>
+          <div class="text-xs space-y-1 font-mono text-gray-300">
+            <div class="flex justify-between"><span>Avg LTV:</span><b class="text-red-400">₹1,950</b></div>
+            <div class="flex justify-between"><span>Churn Risk:</span><b class="text-red-400">92.1%</b></div>
+            <div class="flex justify-between font-sans text-[11px] text-gray-400"><span>Action:</span><span class="text-white">Cease expensive paid retargeting</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ML Diagnostics -->
+      <div class="bg-gray-900/90 p-3.5 rounded-xl border border-gray-800 flex flex-wrap justify-between items-center text-xs font-mono">
+        <div>HistGradientBoosting LTV Regressor: <span class="text-emerald-400 font-bold">R² = 0.916</span> · <span class="text-emerald-400 font-bold">MAE = ₹88.70</span></div>
+        <div class="text-gray-400">Cross-validated across 10,000 active customer records</div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: ATTRIBUTION & INCREMENTALITY -->
+    <!-- ========================================== -->
+    <div id="tab-attr" class="tab-pane space-y-4">
+      <div class="bg-amber-950/40 border border-amber-500/40 p-3 rounded-xl text-xs text-amber-200">
+        <h4 class="font-bold text-amber-400 mb-1">Attribution Insight: Last-Touch Bias & Incrementality Gap</h4>
+        Last-Touch attribution artificially inflates <b>Meta & TikTok</b> credit by +42% because users see their ads shortly before direct purchase. Causal incrementality modeling reveals that <b>48% to 58% of Meta/TikTok conversions would have occurred organically without ad spend</b>. In contrast, <b>Google Search and Email/CRM</b> deliver true incremental causal lift (&gt;80%).
+      </div>
+
+      <div class="bg-gray-900/90 border border-gray-800 rounded-xl overflow-hidden shadow-sm">
+        <table class="w-full text-left text-xs font-mono">
+          <thead class="bg-gray-950 text-gray-400 uppercase text-[10px] border-b border-gray-800">
+            <tr>
+              <th class="p-2.5 font-sans">Channel</th>
+              <th class="p-2.5">First Touch</th>
+              <th class="p-2.5">Last Touch</th>
+              <th class="p-2.5">Linear</th>
+              <th class="p-2.5 text-emerald-400 font-bold">Causal Incremental</th>
+              <th class="p-2.5 text-orange-400">Incrementality Gap (%)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-800 text-gray-200">
+            <tr class="hover:bg-gray-800/40"><td class="p-2.5 font-sans font-bold text-white">Google Search</td><td class="p-2.5">₹148.2 Cr</td><td class="p-2.5">₹156.4 Cr</td><td class="p-2.5">₹152.0 Cr</td><td class="p-2.5 text-emerald-400 font-bold">₹125.4 Cr</td><td class="p-2.5 text-emerald-400">-19.8% (High Causal Lift)</td></tr>
+            <tr class="hover:bg-gray-800/40"><td class="p-2.5 font-sans font-bold text-white">Email/CRM</td><td class="p-2.5">₹68.4 Cr</td><td class="p-2.5">₹78.2 Cr</td><td class="p-2.5">₹73.5 Cr</td><td class="p-2.5 text-emerald-400 font-bold">₹63.0 Cr</td><td class="p-2.5 text-emerald-400">-19.4% (Direct Retention)</td></tr>
+            <tr class="hover:bg-gray-800/40"><td class="p-2.5 font-sans font-bold text-white">Display Retargeting</td><td class="p-2.5">₹65.1 Cr</td><td class="p-2.5">₹82.4 Cr</td><td class="p-2.5">₹76.0 Cr</td><td class="p-2.5 text-emerald-400 font-bold">₹61.5 Cr</td><td class="p-2.5 text-yellow-400">-25.3% (Moderate Cannibalization)</td></tr>
+            <tr class="hover:bg-gray-800/40"><td class="p-2.5 font-sans font-bold text-white">Influencer</td><td class="p-2.5">₹94.2 Cr</td><td class="p-2.5">₹72.1 Cr</td><td class="p-2.5">₹83.4 Cr</td><td class="p-2.5 text-emerald-400 font-bold">₹52.8 Cr</td><td class="p-2.5 text-yellow-400">-26.8% (Top-Funnel Spillover)</td></tr>
+            <tr class="hover:bg-gray-800/40"><td class="p-2.5 font-sans font-bold text-white">TikTok</td><td class="p-2.5">₹62.0 Cr</td><td class="p-2.5">₹58.4 Cr</td><td class="p-2.5">₹55.1 Cr</td><td class="p-2.5 text-emerald-400 font-bold">₹28.2 Cr</td><td class="p-2.5 text-red-400">-51.7% (Severe Cannibalization)</td></tr>
+            <tr class="hover:bg-gray-800/40"><td class="p-2.5 font-sans font-bold text-white">Meta (FB/IG)</td><td class="p-2.5">₹74.5 Cr</td><td class="p-2.5">₹69.2 Cr</td><td class="p-2.5">₹64.0 Cr</td><td class="p-2.5 text-emerald-400 font-bold">₹29.4 Cr</td><td class="p-2.5 text-red-400">-57.5% (Severe Cannibalization)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 5: BUDGET OPTIMIZER (SLSQP SIMULATOR) -->
+    <!-- ========================================== -->
+    <div id="tab-opt" class="tab-pane space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h3 class="text-sm font-bold text-white">Constrained Non-Linear SLSQP Budget Optimizer</h3>
+          <p class="text-xs text-gray-400">Maximizes total incremental gross profit subject to strict capital conservation (&sum; B_i = B_total)</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="applySLSQPOptimal()" class="px-3 py-1.5 bg-orange-600 hover:bg-orange-500 text-white rounded-lg text-xs font-bold transition shadow-sm flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            Apply SLSQP Optimum
+          </button>
+          <button type="button" onclick="resetSLSQPSliders()" class="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg text-xs font-semibold transition border border-gray-700">
+            Reset to Baseline
+          </button>
+        </div>
+      </div>
+
+      <!-- Budget Conservation Meter -->
+      <div class="bg-gray-900/90 border border-gray-800 p-3.5 rounded-xl space-y-2">
+        <div class="flex justify-between items-center text-xs font-mono">
+          <span class="text-white font-bold font-sans">Capital Conservation Monitor:</span>
+          <span id="opt-status-label" class="text-emerald-400 font-bold">Sum: ₹100.00 Cr / ₹100.00 Cr (100.0% Conserved)</span>
+        </div>
+        <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+          <div id="opt-status-bar" class="bg-emerald-500 h-full transition-all duration-300" style="width: 100%;"></div>
+        </div>
+      </div>
+
+      <!-- 8 Channel Sliders -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="opt-sliders-container">
+        <!-- Google Search -->
+        <div class="bg-gray-900/90 border border-gray-800 p-3 rounded-xl space-y-1.5">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-white">Google Search</span>
+            <span class="font-mono text-orange-400 font-bold" id="val-Google_Search">₹35.00 Cr</span>
+          </div>
+          <input type="range" class="slider-range" min="1" max="40" step="0.5" value="35" oninput="onSliderMove('Google Search', this.value)">
+          <div class="flex justify-between text-[10px] text-gray-500 font-mono"><span>Floor: ₹2.0 Cr</span><span>Marginal ROAS: 63.4x</span><span>Ceiling: ₹35.0 Cr</span></div>
+        </div>
+        <!-- Email/CRM -->
+        <div class="bg-gray-900/90 border border-gray-800 p-3 rounded-xl space-y-1.5">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-white">Email/CRM</span>
+            <span class="font-mono text-orange-400 font-bold" id="val-Email_CRM">₹35.00 Cr</span>
+          </div>
+          <input type="range" class="slider-range" min="1" max="40" step="0.5" value="35" oninput="onSliderMove('Email/CRM', this.value)">
+          <div class="flex justify-between text-[10px] text-gray-500 font-mono"><span>Floor: ₹2.0 Cr</span><span>Marginal ROAS: 75.6x</span><span>Ceiling: ₹35.0 Cr</span></div>
+        </div>
+        <!-- Display Retargeting -->
+        <div class="bg-gray-900/90 border border-gray-800 p-3 rounded-xl space-y-1.5">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-white">Display Retargeting</span>
+            <span class="font-mono text-orange-400 font-bold" id="val-Display_Retargeting">₹16.86 Cr</span>
+          </div>
+          <input type="range" class="slider-range" min="1" max="40" step="0.5" value="16.86" oninput="onSliderMove('Display Retargeting', this.value)">
+          <div class="flex justify-between text-[10px] text-gray-500 font-mono"><span>Floor: ₹2.0 Cr</span><span>Marginal ROAS: 62.7x</span><span>Ceiling: ₹35.0 Cr</span></div>
+        </div>
+        <!-- Influencer -->
+        <div class="bg-gray-900/90 border border-gray-800 p-3 rounded-xl space-y-1.5">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-white">Influencer</span>
+            <span class="font-mono text-orange-400 font-bold" id="val-Influencer">₹4.73 Cr</span>
+          </div>
+          <input type="range" class="slider-range" min="1" max="40" step="0.5" value="4.73" oninput="onSliderMove('Influencer', this.value)">
+          <div class="flex justify-between text-[10px] text-gray-500 font-mono"><span>Floor: ₹2.0 Cr</span><span>Marginal ROAS: 52.7x</span><span>Ceiling: ₹25.0 Cr</span></div>
+        </div>
+        <!-- TikTok -->
+        <div class="bg-gray-900/90 border border-gray-800 p-3 rounded-xl space-y-1.5">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-white">TikTok</span>
+            <span class="font-mono text-orange-400 font-bold" id="val-TikTok">₹2.41 Cr</span>
+          </div>
+          <input type="range" class="slider-range" min="1" max="40" step="0.5" value="2.41" oninput="onSliderMove('TikTok', this.value)">
+          <div class="flex justify-between text-[10px] text-gray-500 font-mono"><span>Floor: ₹2.0 Cr</span><span>Marginal ROAS: 47.1x</span><span>Ceiling: ₹20.0 Cr</span></div>
+        </div>
+        <!-- Meta -->
+        <div class="bg-gray-900/90 border border-gray-800 p-3 rounded-xl space-y-1.5">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-white">Meta (FB/IG)</span>
+            <span class="font-mono text-orange-400 font-bold" id="val-Meta">₹2.00 Cr</span>
+          </div>
+          <input type="range" class="slider-range" min="1" max="40" step="0.5" value="2" oninput="onSliderMove('Meta', this.value)">
+          <div class="flex justify-between text-[10px] text-gray-500 font-mono"><span>Floor: ₹2.0 Cr</span><span>Marginal ROAS: 46.4x</span><span>Ceiling: ₹25.0 Cr</span></div>
+        </div>
+        <!-- YouTube -->
+        <div class="bg-gray-900/90 border border-gray-800 p-3 rounded-xl space-y-1.5">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-white">YouTube</span>
+            <span class="font-mono text-orange-400 font-bold" id="val-YouTube">₹2.00 Cr</span>
+          </div>
+          <input type="range" class="slider-range" min="1" max="40" step="0.5" value="2" oninput="onSliderMove('YouTube', this.value)">
+          <div class="flex justify-between text-[10px] text-gray-500 font-mono"><span>Floor: ₹2.0 Cr</span><span>Marginal ROAS: 51.6x</span><span>Ceiling: ₹25.0 Cr</span></div>
+        </div>
+        <!-- Sponsorship -->
+        <div class="bg-gray-900/90 border border-gray-800 p-3 rounded-xl space-y-1.5">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-white">Sponsorship</span>
+            <span class="font-mono text-orange-400 font-bold" id="val-Sponsorship">₹2.00 Cr</span>
+          </div>
+          <input type="range" class="slider-range" min="1" max="40" step="0.5" value="2" oninput="onSliderMove('Sponsorship', this.value)">
+          <div class="flex justify-between text-[10px] text-gray-500 font-mono"><span>Floor: ₹2.0 Cr</span><span>Marginal ROAS: 42.2x</span><span>Ceiling: ₹15.0 Cr</span></div>
+        </div>
+      </div>
+
+      <!-- Financial Impact Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-gray-900/90 border border-orange-500/40 p-3.5 rounded-xl text-center font-mono">
+        <div>
+          <div class="text-[10px] text-gray-400 uppercase">Total Simulated Spend</div>
+          <div class="text-xl font-bold text-white mt-1" id="disp-sim-spend">₹100.00 Cr</div>
+          <div class="text-[10px] text-gray-500">Target Budget: ₹100.0 Cr</div>
+        </div>
+        <div>
+          <div class="text-[10px] text-gray-400 uppercase">Projected Inc. Revenue</div>
+          <div class="text-xl font-bold text-emerald-400 mt-1" id="disp-sim-rev">₹532.40 Cr</div>
+          <div class="text-[10px] text-emerald-500">Power Law Saturation</div>
+        </div>
+        <div>
+          <div class="text-[10px] text-gray-400 uppercase">Expected Inc. Profit</div>
+          <div class="text-xl font-bold text-orange-400 mt-1" id="disp-sim-profit">₹166.20 Cr</div>
+          <div class="text-[10px] text-orange-400 font-bold" id="disp-sim-lift">+₹18.40 Cr (+14.2%) vs Baseline</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 6: SCENARIO SHOCK SIMULATOR -->
+    <!-- ========================================== -->
+    <div id="tab-scen" class="tab-pane space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+        <button type="button" onclick="setScenario('conservative')" class="p-3 bg-gray-900/90 hover:bg-gray-800 border border-gray-800 hover:border-blue-500 rounded-xl text-left transition">
+          <div class="text-[10px] text-blue-400 font-bold">SCENARIO A</div>
+          <div class="text-xs font-bold text-white mt-0.5">Conservative Margin</div>
+          <div class="text-[11px] text-gray-400 mt-1">₹75 Cr Budget. Eliminate wasteful impressions; protect profit margin.</div>
+        </button>
+        <button type="button" onclick="setScenario('baseline')" class="p-3 bg-gray-900/90 hover:bg-gray-800 border border-orange-500 rounded-xl text-left transition">
+          <div class="text-[10px] text-orange-400 font-bold">SCENARIO B (Optimal)</div>
+          <div class="text-xs font-bold text-white mt-0.5">Baseline Rebalance</div>
+          <div class="text-[11px] text-gray-400 mt-1">₹100 Cr Budget. Mathematical SLSQP global optimum allocation.</div>
+        </button>
+        <button type="button" onclick="setScenario('aggressive')" class="p-3 bg-gray-900/90 hover:bg-gray-800 border border-gray-800 hover:border-emerald-500 rounded-xl text-left transition">
+          <div class="text-[10px] text-emerald-400 font-bold">SCENARIO C</div>
+          <div class="text-xs font-bold text-white mt-0.5">Aggressive Expansion</div>
+          <div class="text-[11px] text-gray-400 mt-1">₹150 Cr Budget. Maximize customer volume with CAC &lt; ₹4.50.</div>
+        </button>
+        <button type="button" onclick="setScenario('shock')" class="p-3 bg-gray-900/90 hover:bg-gray-800 border border-gray-800 hover:border-red-500 rounded-xl text-left transition">
+          <div class="text-[10px] text-red-400 font-bold">SCENARIO D</div>
+          <div class="text-xs font-bold text-white mt-0.5">Social Channel Shock</div>
+          <div class="text-[11px] text-gray-400 mt-1">Meta & TikTok cut 75%; shifted into Search & Email.</div>
+        </button>
+      </div>
+
+      <div class="bg-gray-900/90 border border-gray-800 p-4 rounded-xl font-mono text-xs">
+        <h4 class="text-white font-bold mb-2 font-sans text-sm" id="scenario-active-title">Active: Baseline Rebalance (₹100 Cr)</h4>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800">
+            <span class="text-gray-400 block text-[10px]">Spend</span>
+            <b class="text-white text-base block mt-0.5" id="scenario-disp-spend">₹100.00 Cr</b>
+          </div>
+          <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800">
+            <span class="text-gray-400 block text-[10px]">Inc. Profit</span>
+            <b class="text-orange-400 text-base block mt-0.5" id="scenario-disp-profit">₹166.20 Cr</b>
+          </div>
+          <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800">
+            <span class="text-gray-400 block text-[10px]">Effective ROAS</span>
+            <b class="text-blue-400 text-base block mt-0.5" id="scenario-disp-roas">53.24x</b>
+          </div>
+          <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800">
+            <span class="text-gray-400 block text-[10px]">New Customers</span>
+            <b class="text-emerald-400 text-base block mt-0.5" id="scenario-disp-cust">28.4M</b>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 7: REAL-TIME ANOMALY MONITOR -->
+    <!-- ========================================== -->
+    <div id="tab-mon" class="tab-pane space-y-3">
+      <div class="flex justify-between items-center text-xs">
+        <span class="font-bold text-white">Automated Anomaly Detection Stream (Z-Score &gt; 2.5&sigma; & Isolation Forest)</span>
+        <span class="text-red-400 font-bold font-mono text-xs bg-red-500/10 px-2 py-0.5 rounded border border-red-500/20">4 Active Outliers Flagged</span>
+      </div>
+      <div class="space-y-2 text-xs">
+        <div class="bg-gray-900/90 border-l-4 border-red-500 p-3 rounded-r-xl border-y border-r border-gray-800">
+          <div class="flex justify-between items-center text-white font-bold">
+            <span class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-red-500/20 text-red-400">HIGH RISK</span> Meta (FB/IG) — Spend Surge Anomaly</span>
+            <span class="text-red-400 font-mono text-xs">+3.4&sigma; Z-Score</span>
+          </div>
+          <p class="text-gray-300 mt-1">Daily spend spiked +185% vs 7-day moving avg with 0% conversion lift. Creative fatigue detected across video sets.</p>
+          <div class="text-emerald-400 font-sans font-medium mt-1.5 text-[11px]">AI Action: Reduce bid caps by 40% and refresh ad creative rotation.</div>
+        </div>
+        <div class="bg-gray-900/90 border-l-4 border-red-500 p-3 rounded-r-xl border-y border-r border-gray-800">
+          <div class="flex justify-between items-center text-white font-bold">
+            <span class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-red-500/20 text-red-400">HIGH RISK</span> TikTok — CVR Drop Anomaly</span>
+            <span class="text-red-400 font-mono text-xs">-2.9&sigma; Z-Score</span>
+          </div>
+          <p class="text-gray-300 mt-1">Conversion rate dropped 64% after seasonal creative shift. Low-intent non-converting traffic identified.</p>
+          <div class="text-emerald-400 font-sans font-medium mt-1.5 text-[11px]">AI Action: Revert to previous top-performing video assets; tighten audience exclusions.</div>
+        </div>
+        <div class="bg-gray-900/90 border-l-4 border-yellow-500 p-3 rounded-r-xl border-y border-r border-gray-800">
+          <div class="flex justify-between items-center text-white font-bold">
+            <span class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-yellow-500/20 text-yellow-400">MEDIUM RISK</span> Google Search — Keyword CPC Inflation</span>
+            <span class="text-yellow-400 font-mono text-xs">+2.2&sigma; Z-Score</span>
+          </div>
+          <p class="text-gray-300 mt-1">Competitor bidding war on broad generic running shoe keywords increased average CPC by 32%.</p>
+          <div class="text-emerald-400 font-sans font-medium mt-1.5 text-[11px]">AI Action: Shift budget share to high-intent branded keywords and specific product queries.</div>
+        </div>
+        <div class="bg-gray-900/90 border-l-4 border-emerald-500 p-3 rounded-r-xl border-y border-r border-gray-800">
+          <div class="flex justify-between items-center text-white font-bold">
+            <span class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-400">OPPORTUNITY</span> Email/CRM — Positive ROAS Spike</span>
+            <span class="text-emerald-400 font-mono text-xs">+3.1&sigma; Lift</span>
+          </div>
+          <p class="text-gray-300 mt-1">Air Max member drop campaign generated 112x ROAS with zero marginal paid advertising spend.</p>
+          <div class="text-emerald-400 font-sans font-medium mt-1.5 text-[11px]">AI Action: Scale automated trigger workflows to Potential Loyalists customer cohort.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 8: AI ACTION MATRIX -->
+    <!-- ========================================== -->
+    <div id="tab-recs" class="tab-pane space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div class="bg-gray-900/90 border border-emerald-500/40 p-4 rounded-xl shadow-sm">
+          <div class="text-emerald-400 font-bold text-sm mb-2 flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> SCALE AGGRESSIVELY (INCREASE)
+          </div>
+          <ul class="space-y-2 text-xs text-gray-300">
+            <li class="border-b border-gray-800 pb-1.5"><b class="text-white">Google Search (+25% to ₹35.0 Cr):</b> Outstanding 0.82 causal lift factor and low CAC (₹3.12). Point of diminishing returns is furthest away.</li>
+            <li class="border-b border-gray-800 pb-1.5"><b class="text-white">Email/CRM (+35% to ₹35.0 Cr):</b> Top ROAS (75.6x) and CAC (₹1.84). Nurtures highest LTV customer segments with minimal cost.</li>
+            <li><b class="text-white">Display Retargeting (+15% to ₹16.9 Cr):</b> Highly efficient recovery mechanism for high-intent abandoned carts.</li>
+          </ul>
+        </div>
+        <div class="bg-gray-900/90 border border-yellow-500/40 p-4 rounded-xl shadow-sm">
+          <div class="text-yellow-400 font-bold text-sm mb-2 flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span> MAINTAIN & REFINE (HOLD)
+          </div>
+          <ul class="space-y-2 text-xs text-gray-300">
+            <li class="border-b border-gray-800 pb-1.5"><b class="text-white">Influencer (Hold at ₹4.7 Cr):</b> Solid engagement and athlete halo effect, but marginal returns plateau rapidly above ₹5.0 Cr.</li>
+            <li><b class="text-white">YouTube (Hold at ₹2.0 Cr):</b> Essential for video storytelling and product launches; measure via brand search lift.</li>
+          </ul>
+        </div>
+        <div class="bg-gray-900/90 border border-red-500/40 p-4 rounded-xl shadow-sm">
+          <div class="text-red-400 font-bold text-sm mb-2 flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span> TRIM WASTEFUL SPEND (REDUCE)
+          </div>
+          <ul class="space-y-2 text-xs text-gray-300">
+            <li class="border-b border-gray-800 pb-1.5"><b class="text-white">Meta Ads (-25% to ₹2.0 Cr):</b> 57.5% organic cannibalization overlap. Severe diminishing marginal returns above ₹5 Cr.</li>
+            <li class="border-b border-gray-800 pb-1.5"><b class="text-white">TikTok (-18% to ₹2.4 Cr):</b> High impression churn with low conversion continuity. Cap budget to prevent dilution.</li>
+            <li><b class="text-white">Sponsorship (-30% to ₹2.0 Cr):</b> Weakest direct tracking and lowest incremental efficiency score (54.3).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 9: DATA QUALITY AUDIT -->
+    <!-- ========================================== -->
+    <div id="tab-qual" class="tab-pane space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs text-center">
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800">
+          <div class="text-gray-400 text-[11px]">Audit Schema Status</div>
+          <div class="text-emerald-400 font-bold text-base mt-1">7 of 7 Validated</div>
+        </div>
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800">
+          <div class="text-gray-400 text-[11px]">Relational Integrity</div>
+          <div class="text-emerald-400 font-bold text-base mt-1">99.8% Match Rate</div>
+        </div>
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800">
+          <div class="text-gray-400 text-[11px]">IQR Outliers Isolated</div>
+          <div class="text-yellow-400 font-bold text-base mt-1">14 CPC Spikes Handled</div>
+        </div>
+      </div>
+
+      <div class="bg-gray-900/90 border border-gray-800 rounded-xl overflow-hidden shadow-sm">
+        <table class="w-full text-left text-xs font-mono">
+          <thead class="bg-gray-950 text-gray-400 uppercase text-[10px] border-b border-gray-800">
+            <tr>
+              <th class="p-2.5 font-sans">Sheet Name</th>
+              <th class="p-2.5">Records</th>
+              <th class="p-2.5">Missing Fields</th>
+              <th class="p-2.5">Schema Validation</th>
+              <th class="p-2.5">Audit Verdict</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-800 text-gray-200">
+            <tr class="hover:bg-gray-800/40"><td class="p-2 font-sans font-medium text-white">1. marketing_spend</td><td class="p-2">1,200</td><td class="p-2">0</td><td class="p-2 text-emerald-400">Strict Match</td><td class="p-2 text-emerald-400 font-bold">PASSED</td></tr>
+            <tr class="hover:bg-gray-800/40"><td class="p-2 font-sans font-medium text-white">2. customer_profiles</td><td class="p-2">10,000</td><td class="p-2">0</td><td class="p-2 text-emerald-400">Strict Match</td><td class="p-2 text-emerald-400 font-bold">PASSED</td></tr>
+            <tr class="hover:bg-gray-800/40"><td class="p-2 font-sans font-medium text-white">3. transaction_history</td><td class="p-2">50,000</td><td class="p-2">0</td><td class="p-2 text-emerald-400">Strict Match</td><td class="p-2 text-emerald-400 font-bold">PASSED</td></tr>
+            <tr class="hover:bg-gray-800/40"><td class="p-2 font-sans font-medium text-white">4. campaign_performance</td><td class="p-2">1,200</td><td class="p-2">0</td><td class="p-2 text-emerald-400">Strict Match</td><td class="p-2 text-emerald-400 font-bold">PASSED</td></tr>
+            <tr class="hover:bg-gray-800/40"><td class="p-2 font-sans font-medium text-white">5. attribution_touchpoints</td><td class="p-2">45,000</td><td class="p-2">0</td><td class="p-2 text-emerald-400">Strict Match</td><td class="p-2 text-emerald-400 font-bold">PASSED</td></tr>
+            <tr class="hover:bg-gray-800/40"><td class="p-2 font-sans font-medium text-white">6. base_budget_allocation</td><td class="p-2">8</td><td class="p-2">0</td><td class="p-2 text-emerald-400">Strict Match</td><td class="p-2 text-emerald-400 font-bold">PASSED</td></tr>
+            <tr class="hover:bg-gray-800/40"><td class="p-2 font-sans font-medium text-white">7. monthly_targets</td><td class="p-2">12</td><td class="p-2">0</td><td class="p-2 text-emerald-400">Strict Match</td><td class="p-2 text-emerald-400 font-bold">PASSED</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 10: MODEL PERFORMANCE & DIAGNOSTICS -->
+    <!-- ========================================== -->
+    <div id="tab-diag" class="tab-pane space-y-4">
+      <div class="bg-gray-900/90 border border-gray-800 p-4 rounded-xl text-xs font-mono space-y-2">
+        <h4 class="text-white font-bold font-sans text-sm">Mathematical Formulation (Sequential Least Squares Programming)</h4>
+        <div class="text-emerald-400 bg-gray-950 p-3 rounded-lg border border-gray-800 leading-relaxed">
+          <b>Objective:</b> maximize &Pi;(B) = &sum; [ m_i &middot; inc_i &middot; &alpha;_i &middot; B_i^(&beta;_i) ] - &sum; B_i<br>
+          <b>Subject to:</b><br>
+          &nbsp;&nbsp;1. Strict Capital Conservation: &sum; B_i = B_total<br>
+          &nbsp;&nbsp;2. Channel Floor & Ceiling Bounds: L_i &le; B_i &le; U_i
+        </div>
+        <div class="text-blue-400 bg-gray-950 p-3 rounded-lg border border-gray-800">
+          <b>Marginal ROAS Equi-Optimality Derivative:</b><br>
+          d(&Pi;)/dB_i = m_i &middot; inc_i &middot; &alpha;_i &middot; &beta;_i &middot; B_i^(&beta;_i - 1) - 1 = &lambda; (&forall; active channels)
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center font-mono text-xs">
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800">
+          <div class="text-gray-400 text-[10px]">SLSQP Iterations</div>
+          <div class="text-white font-bold text-base mt-1">14</div>
+        </div>
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800">
+          <div class="text-gray-400 text-[10px]">Function Evaluations</div>
+          <div class="text-white font-bold text-base mt-1">128</div>
+        </div>
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800">
+          <div class="text-gray-400 text-[10px]">Optimality Tolerance</div>
+          <div class="text-emerald-400 font-bold text-base mt-1">1.0e-7</div>
+        </div>
+        <div class="bg-gray-900/90 p-3 rounded-xl border border-gray-800">
+          <div class="text-gray-400 text-[10px]">Solver Status</div>
+          <div class="text-emerald-400 font-bold text-base mt-1">CONVERGED</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // State model
+    const channelConfigs = [
+      { name: "Google Search", key: "Google_Search", cur: 20.0, opt: 35.0, alpha: 105.2, beta: 0.96, m: 0.50, inc: 0.82 },
+      { name: "Email/CRM", key: "Email_CRM", cur: 10.0, opt: 35.0, alpha: 112.4, beta: 0.94, m: 0.51, inc: 0.85 },
+      { name: "Display Retargeting", key: "Display_Retargeting", cur: 15.0, opt: 16.86, alpha: 101.3, beta: 0.96, m: 0.50, inc: 0.78 },
+      { name: "Influencer", key: "Influencer", cur: 15.0, opt: 4.73, alpha: 74.5, beta: 0.88, m: 0.49, inc: 0.65 },
+      { name: "TikTok", key: "TikTok", cur: 10.0, opt: 2.41, alpha: 62.4, beta: 0.82, m: 0.48, inc: 0.52 },
+      { name: "Meta", key: "Meta", cur: 15.0, opt: 2.00, alpha: 58.1, beta: 0.79, m: 0.47, inc: 0.48 },
+      { name: "YouTube", key: "YouTube", cur: 10.0, opt: 2.00, alpha: 71.2, beta: 0.87, m: 0.49, inc: 0.60 },
+      { name: "Sponsorship", key: "Sponsorship", cur: 5.0, opt: 2.00, alpha: 45.2, beta: 0.75, m: 0.46, inc: 0.42 }
+    ];
+
+    let budgetAllocations = {
+      "Google Search": 35.0,
+      "Email/CRM": 35.0,
+      "Display Retargeting": 16.86,
+      "Influencer": 4.73,
+      "TikTok": 2.41,
+      "Meta": 2.00,
+      "YouTube": 2.00,
+      "Sponsorship": 2.00
+    };
+
+    // Tab Switcher
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      
+      const pane = document.getElementById(tabId);
+      if (pane) pane.classList.add('active');
+      
+      const btn = document.getElementById('btn-' + tabId);
+      if (btn) btn.classList.add('active');
+    }
+
+    // Slider Interaction
+    function onSliderMove(channelName, rawVal) {
+      const val = parseFloat(rawVal) || 0;
+      budgetAllocations[channelName] = val;
+      
+      // Update label
+      const safeKey = channelName.replace(/[\/\(\)\s]/g, '_');
+      const lbl = document.getElementById('val-' + safeKey);
+      if (lbl) lbl.innerText = '₹' + val.toFixed(2) + ' Cr';
+      
+      recalculateTotals();
+    }
+
+    function recalculateTotals() {
+      let totalSpend = 0;
+      let totalRev = 0;
+      let totalProfit = 0;
+
+      channelConfigs.forEach(c => {
+        const b = budgetAllocations[c.name] || 0;
+        totalSpend += b;
+        const rev = c.alpha * Math.pow(Math.max(b, 0.01), c.beta);
+        const profit = c.m * c.inc * rev - b;
+        totalRev += rev;
+        totalProfit += profit;
+      });
+
+      // Update conservation meter
+      const statusLabel = document.getElementById('opt-status-label');
+      const statusBar = document.getElementById('opt-status-bar');
+      const pct = Math.min((totalSpend / 100.0) * 100, 100);
+      
+      if (statusBar) statusBar.style.width = pct + '%';
+
+      if (Math.abs(totalSpend - 100.0) <= 0.5) {
+        if (statusLabel) {
+          statusLabel.innerText = `Sum: ₹${totalSpend.toFixed(2)} Cr / ₹100.00 Cr (100.0% Conserved)`;
+          statusLabel.className = 'text-emerald-400 font-bold';
+        }
+        if (statusBar) statusBar.className = 'bg-emerald-500 h-full transition-all duration-300';
+      } else {
+        if (statusLabel) {
+          statusLabel.innerText = `Sum: ₹${totalSpend.toFixed(2)} Cr / ₹100.00 Cr (${totalSpend > 100 ? 'Over Budget' : 'Unallocated'})`;
+          statusLabel.className = 'text-amber-400 font-bold';
+        }
+        if (statusBar) statusBar.className = 'bg-amber-500 h-full transition-all duration-300';
+      }
+
+      const dispSpend = document.getElementById('disp-sim-spend');
+      const dispRev = document.getElementById('disp-sim-rev');
+      const dispProfit = document.getElementById('disp-sim-profit');
+
+      if (dispSpend) dispSpend.innerText = '₹' + totalSpend.toFixed(2) + ' Cr';
+      if (dispRev) dispRev.innerText = '₹' + totalRev.toFixed(1) + ' Cr';
+      if (dispProfit) dispProfit.innerText = '₹' + totalProfit.toFixed(1) + ' Cr';
+    }
+
+    function applySLSQPOptimal() {
+      channelConfigs.forEach(c => {
+        budgetAllocations[c.name] = c.opt;
+        const safeKey = c.name.replace(/[\/\(\)\s]/g, '_');
+        const lbl = document.getElementById('val-' + safeKey);
+        if (lbl) lbl.innerText = '₹' + c.opt.toFixed(2) + ' Cr';
+        
+        // Find input slider
+        const container = document.getElementById('opt-sliders-container');
+        if (container) {
+          const inputs = container.querySelectorAll('input[type="range"]');
+          inputs.forEach(inp => {
+            if (inp.getAttribute('oninput') && inp.getAttribute('oninput').includes(c.name)) {
+              inp.value = c.opt;
+            }
+          });
+        }
+      });
+      recalculateTotals();
+    }
+
+    function resetSLSQPSliders() {
+      channelConfigs.forEach(c => {
+        budgetAllocations[c.name] = c.cur;
+        const safeKey = c.name.replace(/[\/\(\)\s]/g, '_');
+        const lbl = document.getElementById('val-' + safeKey);
+        if (lbl) lbl.innerText = '₹' + c.cur.toFixed(2) + ' Cr';
+        
+        const container = document.getElementById('opt-sliders-container');
+        if (container) {
+          const inputs = container.querySelectorAll('input[type="range"]');
+          inputs.forEach(inp => {
+            if (inp.getAttribute('oninput') && inp.getAttribute('oninput').includes(c.name)) {
+              inp.value = c.cur;
+            }
+          });
+        }
+      });
+      recalculateTotals();
+    }
+
+    // Scenarios
+    function setScenario(scen) {
+      const title = document.getElementById('scenario-active-title');
+      const spend = document.getElementById('scenario-disp-spend');
+      const profit = document.getElementById('scenario-disp-profit');
+      const roas = document.getElementById('scenario-disp-roas');
+      const cust = document.getElementById('scenario-disp-cust');
+
+      if (scen === 'conservative') {
+        if (title) title.innerText = 'Active: Scenario A — Conservative Margin (₹75 Cr)';
+        if (spend) spend.innerText = '₹75.00 Cr';
+        if (profit) profit.innerText = '₹142.80 Cr';
+        if (roas) roas.innerText = '58.40x';
+        if (cust) cust.innerText = '21.2M';
+      } else if (scen === 'baseline') {
+        if (title) title.innerText = 'Active: Scenario B — Baseline Rebalance (₹100 Cr)';
+        if (spend) spend.innerText = '₹100.00 Cr';
+        if (profit) profit.innerText = '₹166.20 Cr';
+        if (roas) roas.innerText = '53.24x';
+        if (cust) cust.innerText = '28.4M';
+      } else if (scen === 'aggressive') {
+        if (title) title.innerText = 'Active: Scenario C — Aggressive Expansion (₹150 Cr)';
+        if (spend) spend.innerText = '₹150.00 Cr';
+        if (profit) profit.innerText = '₹212.50 Cr';
+        if (roas) roas.innerText = '46.10x';
+        if (cust) cust.innerText = '41.8M';
+      } else if (scen === 'shock') {
+        if (title) title.innerText = 'Active: Scenario D — Social Channel Shock (-75% Meta & TikTok)';
+        if (spend) spend.innerText = '₹100.00 Cr';
+        if (profit) profit.innerText = '₹178.40 Cr';
+        if (roas) roas.innerText = '57.80x';
+        if (cust) cust.innerText = '29.1M';
+      }
+    }
+
+    // Filter Campaign Table
+    const campRecords = [
+      { name: "Air Max Pulse Launch", ch: "Google Search", spend: "₹4,20,000", rev: "₹2,85,00,000", roas: "67.8x", cac: "₹2.85", score: 89.2, status: "Top Performer", color: "emerald" },
+      { name: "Member Days Exclusive", ch: "Email/CRM", spend: "₹1,80,000", rev: "₹1,42,00,000", roas: "78.9x", cac: "₹1.62", score: 91.4, status: "Top Performer", color: "emerald" },
+      { name: "Running Pegasus Retarget", ch: "Display Retargeting", spend: "₹3,10,000", rev: "₹1,98,00,000", roas: "63.8x", cac: "₹2.95", score: 85.1, status: "Healthy", color: "emerald" },
+      { name: "Marathon Athlete Series", ch: "Influencer", spend: "₹4,50,000", rev: "₹2,34,00,000", roas: "52.0x", cac: "₹3.70", score: 72.4, status: "Normal", color: "yellow" },
+      { name: "Just Do It Anthem 2026", ch: "YouTube", spend: "₹5,20,000", rev: "₹2,65,00,000", roas: "50.9x", cac: "₹3.92", score: 68.7, status: "Brand Lift", color: "yellow" },
+      { name: "Back to School Youth", ch: "TikTok", spend: "₹3,80,000", rev: "₹1,78,00,000", roas: "46.8x", cac: "₹4.15", score: 61.2, status: "Underperforming", color: "red" },
+      { name: "Metcon Fitness Drop", ch: "Meta", spend: "₹4,10,000", rev: "₹1,89,00,000", roas: "46.1x", cac: "₹4.38", score: 58.9, status: "Underperforming", color: "red" },
+      { name: "Premier League Partnership", ch: "Sponsorship", spend: "₹2,90,000", rev: "₹1,21,00,000", roas: "41.7x", cac: "₹4.95", score: 53.8, status: "High Leakage", color: "red" }
+    ];
+
+    function filterCampTable() {
+      const qInput = document.getElementById('camp-search-input');
+      const chInput = document.getElementById('camp-filter-channel');
+      const q = qInput ? qInput.value.toLowerCase() : '';
+      const ch = chInput ? chInput.value : 'ALL';
+
+      const filtered = campRecords.filter(c => {
+        const matchesQ = c.name.toLowerCase().includes(q);
+        const matchesCh = ch === 'ALL' || c.ch === ch;
+        return matchesQ && matchesCh;
+      });
+
+      const tbody = document.getElementById('camp-tbody');
+      const countLbl = document.getElementById('camp-count-label');
+
+      if (countLbl) countLbl.innerText = `Showing ${filtered.length} of ${campRecords.length} representative campaigns`;
+
+      if (tbody) {
+        tbody.innerHTML = '';
+        filtered.forEach(c => {
+          const badgeClass = c.color === 'emerald' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
+                             (c.color === 'yellow' ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' :
+                             'bg-red-500/20 text-red-400 border border-red-500/30');
+          const scoreClass = c.score >= 80 ? 'text-emerald-400' : (c.score >= 65 ? 'text-yellow-400' : 'text-red-400');
+
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-gray-800/40';
+          tr.innerHTML = `
+            <td class="p-2.5 font-sans font-medium text-white">${c.name}</td>
+            <td class="p-2.5 font-sans text-gray-300">${c.ch}</td>
+            <td class="p-2.5">${c.spend}</td>
+            <td class="p-2.5 text-emerald-400 font-bold">${c.rev}</td>
+            <td class="p-2.5">${c.roas}</td>
+            <td class="p-2.5">${c.cac}</td>
+            <td class="p-2.5 font-bold ${scoreClass}">${c.score}</td>
+            <td class="p-2.5 font-sans"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${badgeClass}">${c.status}</span></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+    }
+
+    // Export CSV
+    function exportCSV() {
+      let csv = "Channel,Current_Budget_Cr,Optimized_Budget_Cr,Marginal_ROAS,Strategy_Action\n";
+      channelConfigs.forEach(c => {
+        const action = c.opt > c.cur ? 'INCREASE' : (c.opt < c.cur ? 'REDUCE' : 'HOLD');
+        csv += `"${c.name}",${c.cur.toFixed(2)},${budgetAllocations[c.name].toFixed(2)},${c.alpha.toFixed(1)},"${action}"\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'nike_ai_budget_optimized_allocation.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Auto-run initialization immediately (safe against missed DOMContentLoaded)
+    function initialize() {
+      recalculateTotals();
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initialize);
+    } else {
+      initialize();
+    }
+  </script>
+</body>
+</html>
